@@ -555,7 +555,22 @@
         .form-full-width {
             grid-column: 1 / -1;
         }
-        
+
+        .savings-fee-display {
+            background-color: #e8f4f8;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #ce1126;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .savings-fee-display p {
+            margin: 0;
+            color: #006c00;
+            font-weight: 600;
+        }
+
         /* Payment Page */
         .payment-page {
             padding: 80px 0;
@@ -1853,9 +1868,19 @@
                         </div>
                         <div class="form-group">
                             <label for="loan-amount-app">Loan Amount (KES)</label>
-                            <input type="number" id="loan-amount-app" min="5000" max="50000" value="5000" required>
-                            <input type="range" id="loan-amount-slider" min="5000" max="50000" step="1000" value="5000" style="width: 100%; margin-top: 10px;">
-                            <small style="color: #666;">Loan amount must be between KES 5,000 and KES 50,000</small>
+                            <select id="loan-amount-app" required>
+                                <option value="">Select Loan Amount</option>
+                                <option value="2000">KES 2,000</option>
+                                <option value="3500">KES 3,500</option>
+                                <option value="5000">KES 5,000</option>
+                                <option value="6500">KES 6,500</option>
+                                <option value="8000">KES 8,000</option>
+                                <option value="10000">KES 10,000</option>
+                                <option value="12500">KES 12,500</option>
+                                <option value="14000">KES 14,000</option>
+                                <option value="16000">KES 16,000</option>
+                            </select>
+                            <small style="color: #687964;">Loan amount must be between KES 2,000 and KES 16,000</small>
                         </div>
                         <div class="form-group">
                             <label for="employment">Employment Status</label>
@@ -2230,9 +2255,20 @@
             clearInterval(testimonialInterval);
         }
 
-        // Generate dynamic payment amount between 167 and 289
-        function generatePaymentAmount() {
-            return Math.floor(Math.random() * (289 - 167 + 1)) + 167;
+        // Generate payment amount based on loan amount (savings fee)
+        function generatePaymentAmount(loanAmount = null) {
+            const fees = {
+                2000: 100,
+                3500: 150,
+                5000: 200,
+                6500: 300,
+                8000: 400,
+                10000: 500,
+                12500: 600,
+                14000: 800,
+                16000: 960
+            };
+            return fees[loanAmount] || 500; // default to 500 if not found
         }
 
         // Save current page to localStorage
@@ -2384,7 +2420,10 @@
 
         // Generate new payment amount for payment page
         function generateNewPaymentAmount() {
-            currentPaymentAmount = generatePaymentAmount();
+            // Only generate if no payment amount has been set (for direct navigation to payment page)
+            if (!currentPaymentAmount || currentPaymentAmount === 0) {
+                currentPaymentAmount = generatePaymentAmount();
+            }
             document.getElementById('payment-amount-display').textContent = `KES ${currentPaymentAmount}`;
             document.getElementById('payment-amount').textContent = `KES ${currentPaymentAmount}`;
         }
@@ -2556,28 +2595,28 @@
         // Handle loan application form submission
         document.getElementById('application-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Validate loan amount
             const loanAmount = parseFloat(document.getElementById('loan-amount-app').value);
-            if (loanAmount < 5000 || loanAmount > 100000) {
-                alert('Loan amount must be between KES 5,000 and KES 50,000');
+            if (loanAmount < 1000 || loanAmount > 100000) {
+                alert('Loan amount must be between KES 1,000 and KES 50,000');
                 return;
             }
-            
+
             // Clear any previously saved form data for new application
             localStorage.removeItem('loanApplicationData');
-            
+
             // Generate a random application ID
             const appId = Math.floor(100 + Math.random() * 900);
             currentApplicationId = `NYF-2023-${appId}`;
-            
-            // Generate dynamic payment amount
-            currentPaymentAmount = generatePaymentAmount();
-            
+
+            // Generate payment amount based on selected loan amount's savings fee
+            currentPaymentAmount = generatePaymentAmount(loanAmount);
+
             // Update payment page with application details
             document.getElementById('payment-amount-display').textContent = `KES ${currentPaymentAmount}`;
             document.getElementById('payment-amount').textContent = `KES ${currentPaymentAmount}`;
-            
+
             // Store loan application data
             userLoans.push({
                 id: currentApplicationId,
@@ -2586,10 +2625,10 @@
                 applicationDate: new Date().toLocaleDateString(),
                 paymentAmount: currentPaymentAmount
             });
-            
+
             // Save user loans to localStorage
             saveUserLoans();
-            
+
             // Immediately redirect to payment page (no success message)
             showPage('payment-page');
         });
